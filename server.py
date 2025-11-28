@@ -49,7 +49,10 @@ def make_api_request(url: str, params: dict, timeout: int = 10) -> Optional[Dict
         Prints error message to console if request fails
     """
     try:
-        response = requests.get(url, params=params, timeout=timeout)
+        response = requests.get(url, params=params, headers={"Accept": "application/json"}, timeout=timeout)
+        print(f"Response status: {response.status_code}")
+        print(f"Response body: {response.text}")
+        
         #Checking if the response status code indicates success
         response.raise_for_status()
         return response.json()
@@ -126,6 +129,7 @@ if __name__ == "__main__":
     mcp.run(transport="streamable-http")
     #mcp.run(transport="streamable-http", host="testmcpdemo-e2abdecseafneea8.westeurope-01.azurewebsites.net", port=8080)
     #mcp.run()
+
 
 
 
