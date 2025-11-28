@@ -22,7 +22,9 @@ from config import *
 
 # secrets = get_secrets("MCP_Secrets")
 
-mcp = FastMCP()
+NEW_PROBLEM_CODES_URL = os.getenv("NEW_PROBLEM_CODES_URL")
+port = int(os.getenv("PORT", 8000))
+mcp = FastMCP('mcptest',host="0.0.0.0", port=port)
 
 def make_api_request(url: str, params: dict, timeout: int = 10) -> Optional[Dict]:
     """
@@ -82,6 +84,15 @@ def make_api_request(url: str, params: dict, timeout: int = 10) -> Optional[Dict
 #         return {"error": "Failed to fetch policy details"}
 
 
+
+# @mcp.tool()
+# def vrn():
+
+
+# @mcp.tool()
+# def personal_info():
+
+
 @mcp.tool()
 def get_problem_codes(timeout: int = 10):
     """
@@ -103,34 +114,12 @@ def get_problem_codes(timeout: int = 10):
         return {"error": "Failed to fetch problem codes"}
 
 
-# @mcp.tool()
-# def assist_api(
-#     vCustGroup: str,
-#     identityState: int,
-#     atHomeAddress: bool,
-#     contact_name: str,
-#     telephone: str,
-#     email: str,
-#     faultCode: str,
-#     recaptchaToken: str,
-#     remarks: str,
-#     vehicleReg: str,
-#     dangerousLocationOverrideReason: str,
-#     title: Optional[str] = None,
-#     firstName: Optional[str] = None,
-#     surname: Optional[str] = None,
-#     customerGroupCode: Optional[str] = None,
-#     timeout: int = 10
-# ):
-#     """Call Assist API for quick support"""
-
-
-
-
 if __name__ == "__main__":
-    # mcp.run(transport="streamable-http", host="0.0.0.0", port=8080)
-    # #mcp.run()
     #port = int(os.getenv("PORT", 8000))  # fallback to 8000 for local testing
-    mcp.run(transport="streamable-http", host="0.0.0.0", port=8080)
+    mcp.run(transport="streamable-http")
+    #mcp.run(transport="streamable-http", host="testmcpdemo-e2abdecseafneea8.westeurope-01.azurewebsites.net", port=8080)
+    #mcp.run()
+
+
 
 
