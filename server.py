@@ -22,8 +22,14 @@ from config import *
 
 # secrets = get_secrets("MCP_Secrets")
 
-NEW_PROBLEM_CODES_URL = os.getenv("NEW_PROBLEM_CODES_URL")
+#NEW_PROBLEM_CODES_URL = os.getenv("NEW_PROBLEM_CODES_URL")
+
+
+NEW_PROBLEM_CODES_URL = os.getenv("NEW_PROBLEM_CODES_URL") or getattr(config, "NEW_PROBLEM_CODES_URL", None)
+if not NEW_PROBLEM_CODES_URL:
+    raise ValueError("NEW_PROBLEM_CODES_URL is missing")
 print("Loaded URL:", NEW_PROBLEM_CODES_URL)
+
 port = int(os.getenv("PORT", 8000))
 mcp = FastMCP('mcptest',host="0.0.0.0", port=port)
 
@@ -120,6 +126,7 @@ if __name__ == "__main__":
     mcp.run(transport="streamable-http")
     #mcp.run(transport="streamable-http", host="testmcpdemo-e2abdecseafneea8.westeurope-01.azurewebsites.net", port=8080)
     #mcp.run()
+
 
 
 
