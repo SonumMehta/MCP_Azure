@@ -114,6 +114,9 @@ def get_problem_codes(timeout: int = 10):
     Returns:
         dict: JSON response from the API or error message.
     """
+    print("Inside get_problem_codes tool")
+    print("Calling make_api_request with URL:", NEW_PROBLEM_CODES_URL)
+    
     #No params needed since it's a public endpoint
     params = {}
     result = make_api_request(NEW_PROBLEM_CODES_URL, params, timeout)
@@ -129,6 +132,7 @@ if __name__ == "__main__":
     mcp.run(transport="streamable-http")
     #mcp.run(transport="streamable-http", host="testmcpdemo-e2abdecseafneea8.westeurope-01.azurewebsites.net", port=8080)
     #mcp.run()
+
 
 
 
